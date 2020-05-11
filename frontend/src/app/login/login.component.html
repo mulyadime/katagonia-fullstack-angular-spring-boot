@@ -1,0 +1,43 @@
+<div class="page-login">
+    <div class="page-title">
+        <div class="logo"></div>
+    </div>
+    <div class="page-content">
+        <form [formGroup]="formLogin">
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label" for="">Username</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" formControlName="username" required>
+                </div>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="formLogin.get('username').invalid && (formLogin.get('username').dirty || formLogin.get('username').touched)">
+                <div *ngIf="formLogin.get('username').hasError('required')">
+                    username wajib di isi.
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label" for="">Password</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="password" formControlName="password" required>
+                </div>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="formLogin.get('password').invalid && (formLogin.get('password').dirty || formLogin.get('password').touched)">
+                <div *ngIf="formLogin.get('password').hasError('required')">
+                    password wajib di isi.
+                </div>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="errMsg">
+                {{ errMsg }}
+            </div>
+            <div class="form-group-btn">
+                <button class="col-sm-5 btn btn-primary" (click)="login()" [disabled]="formLogin.invalid">
+                    <div class="mr-2 fas fa-sign-in-alt"></div>Sign In
+                </button>
+                <button class="col-sm-5 btn btn-danger" (click)="register()">
+                    <i class="mr-2 fas fa-plus-square"></i>Register
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

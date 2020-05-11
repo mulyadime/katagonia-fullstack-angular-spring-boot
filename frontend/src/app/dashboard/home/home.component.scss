@@ -1,0 +1,73 @@
+.page-home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-title {
+    
+}
+
+.page-content {
+    margin-top: 30px;
+    padding: 10px 30px;
+    box-shadow: 1px 5px 10px rgba(black, .2);
+    span {
+        display: flex;
+        justify-content: center;
+
+        margin: 30px auto;
+    }
+    .nav-item {
+        .nav-link {
+            color: black;
+        }
+    }
+}
+
+.page-footer {
+    display: flex;
+    justify-content: center;
+    
+    margin: 30px auto;
+    letter-spacing: .5px;
+    span {
+        font-weight: 900;
+    }
+}
+
+.link-ktg {
+    display: flex;
+    flex-direction: row;
+    span {
+        margin: 30px auto;
+    }
+}
+
+.ktg-category {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-image: url('../../../assets/img/category.png');
+}
+
+.ktg-term {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-image: url('../../../assets/img/term.png');
+}
+
+.ktg-acronym {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-image: url('../../../assets/img/acronym.png');
+}
+
+.ktg-dictionary {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-image: url('../../../assets/img/database.png');
+}

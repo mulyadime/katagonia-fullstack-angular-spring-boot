@@ -1,0 +1,109 @@
+<div class="page">
+    <div class="page-filter">
+        <form [formGroup]="formTerm">
+            <div class="form-group">
+                <button class="btn btn-dark" (click)="dashboard()">
+                    <i class="mr-2 fas fa-arrow-left"></i>Back to Dashboard
+                  </button>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 col-form-label" for="">New Term</label>
+                <input class="form-control" type="text" formControlName="name" required>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="formTerm.get('name').invalid && (formTerm.get('name').dirty || formTerm.get('name').touched)">
+                <div *ngIf="formTerm.get('name').hasError('required')">
+                    <li class="ml-3">term wajib di isi.</li>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 col-form-label" for="">Translation</label>
+                <input class="form-control" type="text" formControlName="translation" required>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="formTerm.get('translation').invalid && (formTerm.get('translation').dirty || formTerm.get('translation').touched)">
+                <div *ngIf="formTerm.get('translation').hasError('required')">
+                    <li class="ml-3">Translation wajib di isi.</li>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 col-form-label" for="">Category</label>
+                <input class="form-control" type="text" formControlName="category" required>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="formTerm.get('category').invalid && (formTerm.get('category').dirty || formTerm.get('category').touched)">
+                <div *ngIf="formTerm.get('category').hasError('required')">
+                    <li class="ml-3">Category wajib di isi.</li>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 col-form-label" for="">Language</label>
+                <input class="form-control" type="text" formControlName="language" required>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="formTerm.get('language').invalid && (formTerm.get('language').dirty || formTerm.get('language').touched)">
+                <div *ngIf="formTerm.get('language').hasError('required')">
+                    <li class="ml-3">Language wajib di isi.</li>
+                </div>
+            </div>
+
+            <div class="form-group-btn">
+                <button class="col-sm-4 btn btn-secondary" [disabled]="formTerm.invalid" (click)="save()">
+                    <i class="mr-2 fas fa-save"></i>Save
+                  </button>
+                <button class="col-sm-6 btn btn-success" (click)="goToCategory()">
+                    <i class="mr-2 fas fa-search"></i>Search by Category
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="page-content">
+        <form>
+            <div class="form-group">
+                <input class="col-sm-7 form-control" type="text">
+                <div class="col-sm-5 btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary">
+                        <i class="mr-2 fas fa-search"></i>Find Term
+                    </button>
+                    <button type="button" class="btn btn-dark" (click)="getData()">
+                        <i class="mr-2 fas fa-sync"></i>Refresh
+                    </button>
+                </div>
+            </div>
+        </form>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Term</th>
+                <th scope="col">Translation</th>
+                <th scope="col">Category</th>
+                <th scope="col">Language</th>
+                <th scope="col">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" *ngIf="rowCount === 0">
+                    <th colspan="6" scope="row">Tidak ada data.</th>
+                </tr>
+                <tr *ngFor="let item of termList">
+                    <th scope="row">1</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.translation }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.language }}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-warning" (click)="getDataById(item.id)">
+                                <i class="mr-2 fas fa-edit"></i>Ubah
+                            </button>
+                            <button type="button" class="btn btn-danger" (click)="remove(item.id)">
+                                <i class="mr-2 fas fa-trash"></i>Hapus
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="page">
+    <div class="page-filter">
+        <form [formGroup]="form">
+            <div class="form-group">
+                <button class="btn btn-dark" (click)="dashboard()">
+                    <i class="mr-2 fas fa-arrow-left"></i>Back to Dashboard
+                </button>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 col-form-label" for="">New Acronym</label>
+                <input class="form-control" type="text" formControlName="name" required>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)">
+                <div *ngIf="form.get('name').hasError('required')">
+                    <li class="ml-3">Acronym wajib di isi.</li>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-6 col-form-label" for="">Category</label>
+                <input class="form-control" type="text" formControlName="category" required>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="form.get('category').invalid && (form.get('category').dirty || form.get('category').touched)">
+                <div *ngIf="form.get('category').hasError('required')">
+                    <li class="ml-3">Kategori wajib di isi.</li>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-6 col-form-label" for="">Bhs Indonesia</label>
+                <input class="form-control" type="text" formControlName="indonesia" required>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="form.get('indonesia').invalid && (form.get('indonesia').dirty || form.get('indonesia').touched)">
+                <div *ngIf="form.get('indonesia').hasError('required')">
+                    <li class="ml-3">Bhs Indonesia wajib di isi.</li>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-6 col-form-label" for="">Bhs Inggris</label>
+                <input class="form-control" type="text" formControlName="english" required>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="form.get('english').invalid && (form.get('english').dirty || form.get('english').touched)">
+                <div *ngIf="form.get('english').hasError('required')">
+                    <li class="ml-3">Bhs Inggris wajib di isi.</li>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="col-sm-4 btn btn-primary" [disabled]="form.invalid" (click)="save()">
+                    <i class="mr-2 fas fa-save"></i>Save
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="page-content">
+        <form>
+            <div class="form-group">
+                <input class="col-sm-7 form-control" type="text">
+                <div class="col-sm-5 btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary">
+                        <i class="mr-2 fas fa-search"></i>Search
+                    </button>
+                    <button type="button" class="btn btn-dark">
+                        <i class="mr-2 fas fa-sync"></i>Refresh
+                    </button>
+                </div>
+            </div>
+        </form>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Acronym</th>
+                <th scope="col">Category</th>
+                <th scope="col">Bhs Indonesia</th>
+                <th scope="col">Bhs Inggris</th>
+                <th scope="col">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" *ngIf="rowCount === 0">
+                    <th colspan="6" scope="row">Tidak ada data.</th>
+                </tr>
+
+                <tr *ngFor="let item of acronymList">
+                    <th scope="row">1</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.indonesia }}</td>
+                    <td>{{ item.english }}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-warning" (click)="getDataById(item.id)">
+                                <i class="mr-2 fas fa-edit"></i>Ubah
+                            </button>
+                            <button type="button" class="btn btn-danger" (click)="remove(item.id)">
+                                <i class="mr-2 fas fa-trash"></i>Hapus
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+          <div class="content-footer">
+              <button class="btn btn-success">
+                  <i class="mr-2 fas fa-database"></i>Makna Database
+                </button>
+          </div>
+    </div>
+</div>
