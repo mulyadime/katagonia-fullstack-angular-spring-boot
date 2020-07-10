@@ -2,6 +2,37 @@
     <a class="btn btn-primary" routerLink="/">
         <i class="mr-2 fas fa-home"></i>Home
     </a>
+
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link link-ktg btn btn-outline-info" routerLink="/category">
+                <div class="ktg-category"></div>
+                <span>Category</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link link-ktg btn btn-outline-info" routerLink="/term">
+                <div class="ktg-term"></div>
+                <span>Term</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link link-ktg btn btn-outline-info" routerLink="/acronym">
+                <div class="ktg-acronym"></div>
+                <span>Acronym</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link link-ktg btn btn-outline-info" routerLink="/dictionary">
+                <div class="ktg-dictionary"></div>
+                <span>My Dictionary</span>
+            </a>
+        </li>
+    </ul>
+
     <button class="btn btn-danger" (click)="logout()">
         <i class="mr-2 fas fa-power-off"></i>Logout
     </button>

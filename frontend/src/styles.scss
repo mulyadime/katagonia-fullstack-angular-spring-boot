@@ -1,8 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import "~@ng-select/ng-select/themes/ant.design.theme.css";
 .logo {
     width: 730px;
     height: 227px;
     background-repeat: no-repeat;
     background-image: url('assets/img/katagonia.jpg');
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.link-ktg {
+    display: flex;
+    flex-direction: row;
+    span {
+        // margin: 30px auto;
+    }
+}
+
+@mixin logo-16 {
+    width: 18px;
+    height: 26px;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+}
+
+.ktg-category {
+    @include logo-16;
+    margin-right: 10px;
+    // background-image: url('assets/img/category.png');
+}
+
+.ktg-term {
+    @include logo-16;
+    margin-right: 10px;
+    // background-image: url('assets/img/term.svg');
+}
+
+.ktg-acronym {
+    @include logo-16;
+    margin-right: 10px;
+    // background-image: url('assets/img/Acronym.svg');
+}
+.ktg-dictionary {
+    @include logo-16;
+    margin-right: 10px;
+    // background-image: url('assets/img/Db.svg');
 }

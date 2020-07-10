@@ -8,6 +8,7 @@ import { AcronymComponent } from './acronym/acronym.component';
 import { DictionaryComponent } from './dictionary/dictionary.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -21,11 +22,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+
     DashboardRoutingModule,
+    AutocompleteLibModule
   ],
-  exports: [
-    FormsModule,
-    ReactiveFormsModule,
-  ]
 })
 export class DashboardModule { }

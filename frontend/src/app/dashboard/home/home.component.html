@@ -4,39 +4,30 @@
     </div>
 
     <div class="page-content">
-        <span>Search By</span>
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link link-ktg" routerLink="/category">
-                    <div class="ktg-category"></div>
-                    <span>Category</span>
-                </a>
-            </li>
+		<form autocomplete="off" novalidate [formGroup]="reactiveForm">
+            <div class="ng-autocomplete">
+                <ng-autocomplete
+                    [data]="countriesReactive"
+                    formControlName="name"
+                    [initialValue]=""
+                    [placeHolder]="placeholder"
+                    [searchKeyword]="keyword"
+                    historyIdentifier="countriesReactiveList"
+                    [historyHeading]="historyHeading"
+                    historyListMaxNumber="3"
+                    (inputChanged)="getResponse($event)"
+                    [isLoading]="isLoadingResult"
+                    [debounceTime]="400"
+                    [minQueryLength]="2"
+                    [itemTemplate]="itemTemplate">
+                </ng-autocomplete>
 
-            <li class="nav-item">
-                <a class="nav-link link-ktg" routerLink="/term">
-                    <div class="ktg-term"></div>
-                    <span>Term</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link link-ktg" routerLink="/acronym">
-                    <div class="ktg-acronym"></div>
-                    <span>Acronym</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link link-ktg" routerLink="/dictionary">
-                    <div class="ktg-dictionary"></div>
-                    <span>My Dictionary</span>
-                </a>
-            </li>
-        </ul>
+                <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.termName"></a>
+                </ng-template>
+            </div>
+        </form>
+          
     </div>
 
-    <div class="page-footer">
-        Selamat datang, <span>{{ userLoggedIn }}</span>
-    </div>
 </div>

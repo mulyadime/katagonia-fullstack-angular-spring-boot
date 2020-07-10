@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../__services/auth.service';
 import { TokenService } from '../__services/token.service';
@@ -13,9 +13,11 @@ export class LoginComponent implements OnInit {
 
   formLogin: FormGroup;
   errMsg: string;
+  returnUrl: string;
 
   constructor(
-    private activatedRoute: Router,
+    private activatedRoute: ActivatedRoute,
+    private route: Router,
     private _fb: FormBuilder,
     private svcAuth: AuthService,
     private svcToken: TokenService
@@ -34,6 +36,8 @@ export class LoginComponent implements OnInit {
         // Validators.minLength(6),
       ),
     });
+
+    this.returnUrl = this.activatedRoute.snapshot.queryParamMap.get('returnUrl');
   }
 
   login(): void {
@@ -41,7 +45,7 @@ export class LoginComponent implements OnInit {
     this.svcAuth.login(this.formLogin.value).subscribe(
       res => { 
         this.svcToken.save(res.token, res.username);
-        this.activatedRoute.navigate(['']);
+        this.route.navigate([this.returnUrl]);
       },
       err => {
         if (err.status == 401) {
@@ -52,7 +56,7 @@ export class LoginComponent implements OnInit {
   }
 
   register(): void {
-    this.activatedRoute.navigate(['register']);
+    this.route.navigate(['register']);
   }
 
 }
