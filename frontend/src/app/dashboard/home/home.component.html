@@ -38,6 +38,10 @@
                         <a [innerHTML]="item.termName"></a>    
                         <small class="font-italic text-black-50">Diolah dari: Term</small>
                     </div>
+                    <div class="item">
+                        <a [innerHTML]="item.acronymName"></a>    
+                        <small class="font-italic text-black-50">Diolah dari: Acronym</small>
+                    </div>
                 </ng-template>
 
                 <button class="btn btn-primary mt-2" type="submit" [disabled]="!reactiveForm.valid">
