@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenService } from 'src/app/__services/token.service';
-import { Observable, concat, Subject, of } from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import { Acronym } from 'src/app/_models/acronym';
-import { AcronymService } from 'src/app/__services/acronym.service';
 import { SearchService } from 'src/app/__services/search.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { SearchRequest } from 'src/app/_models/search-request';
 
 @Component({
   selector: 'app-home',
@@ -15,13 +11,18 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 export class HomeComponent implements OnInit {
   reactiveForm: FormGroup;
   name = '';
-  keyword = 'termName';
+  keyword = 'translationName';
   historyHeading: string = 'Recently selected.'
   placeholder: string = "Enter text you want searching..";
 
   search: string = '';
   isLoadingResult: boolean = false;
-  countriesReactive: string[];
+  countriesReactive;
+
+  searchRequest: SearchRequest;
+
+  isTableResult: boolean = false;
+  isTableList;
   
   constructor(
     private _fb: FormBuilder,
@@ -30,21 +31,54 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.reactiveForm = this._fb.group({
-      name: [{value: '', disabled: false}, Validators.required]
+      name: [{value: '', disabled: false}, Validators.required],
+      lang: new FormControl(false),
     });
   }
 
-  submit() {
-    if (this.reactiveForm.valid) {
-      console.log(this.reactiveForm.value);
+  submit(): void {
+    this.searchRequest = new SearchRequest(
+      this.isEnglish,
+      this.reactiveForm.get('name').value.termName
+    );
+    console.log(this.searchRequest)
+    this.svcSearch.postSearch(this.searchRequest).subscribe(
+      result => {
+        this.isTableResult = true;
+        this.isTableList = result;
+      }
+    )
+  }
+
+  get isEnglish() {
+    if (this.reactiveForm.get('lang').value === true) {
+      return true
     }
+
+    return false
+  }
+
+  get isIndo() {
+    if (this.reactiveForm.get('lang').value === false) {
+      return true
+    }
+
+    return false
+  }
+
+  get isName() {
+    return this.reactiveForm.get('name').value;
   }
 
   getResponse(event) {
     this.isLoadingResult = true;
-    this.svcSearch.getSearch(event).subscribe(
+    this.searchRequest = new SearchRequest(
+      this.isEnglish,
+      event
+    );
+
+    this.svcSearch.postSearch(this.searchRequest).subscribe(
       result => {
-        console.log(result);
         this.countriesReactive = result;
       }
     )

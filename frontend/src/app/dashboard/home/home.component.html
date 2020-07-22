@@ -4,7 +4,16 @@
     </div>
 
     <div class="page-content">
-		<form autocomplete="off" novalidate [formGroup]="reactiveForm">
+		<form autocomplete="off" novalidate [formGroup]="reactiveForm" (ngSubmit)="submit()">
+            <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck"
+                  formControlName="lang">
+                  <label class="form-check-label" for="gridCheck">
+                    Cari berdasarkan translasi Bhs Inggris
+                  </label>
+                </div>
+              </div>
             <div class="ng-autocomplete">
                 <ng-autocomplete
                     [data]="countriesReactive"
@@ -12,8 +21,6 @@
                     [initialValue]=""
                     [placeHolder]="placeholder"
                     [searchKeyword]="keyword"
-                    historyIdentifier="countriesReactiveList"
-                    [historyHeading]="historyHeading"
                     historyListMaxNumber="3"
                     (inputChanged)="getResponse($event)"
                     [isLoading]="isLoadingResult"
@@ -23,10 +30,42 @@
                 </ng-autocomplete>
 
                 <ng-template #itemTemplate let-item>
-                    <a [innerHTML]="item.termName"></a>
+                    <div class="item" *ngIf="isEnglish">
+                        <a [innerHTML]="item.translationName"></a>    
+                        <small class="font-italic text-black-50">Fetched from: Term</small>
+                    </div>
+                    <div class="item" *ngIf="isIndo">
+                        <a [innerHTML]="item.termName"></a>    
+                        <small class="font-italic text-black-50">Diolah dari: Term</small>
+                    </div>
                 </ng-template>
+
+                <button class="btn btn-primary mt-2" type="submit" [disabled]="!reactiveForm.valid">
+                    Search
+                </button>
             </div>
         </form>
+
+
+        <table class="table table-striped mt-3" *ngIf="isTableResult">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Term</th>
+                <th scope="col">Translation</th>
+                <th scope="col">Acronym</th>
+              </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let item of isTableList">
+                    <th scope="row">1</th>
+                    <td>{{ item.termName }}</td>
+                    <td>{{ item.translationName }}</td>
+                    <td>{{ item.acronymName }}</td>
+                </tr>
+            </tbody>
+          </table>
           
     </div>
 
